@@ -8,6 +8,7 @@
 #include "pcl_conversions/pcl_conversions.h"
 #include <pcl/filters/extract_indices.h>
 #include <pcl/common/transforms.h>
+#include <pcl/console/print.h>
 
 #include "tf2_ros/buffer.hpp"
 #include "tf2_ros/transform_listener.hpp"
@@ -28,6 +29,7 @@
 #include <vector>
 #include <limits>
 #include <type_traits>
+
 
 using namespace ground_segmentation;
 using PointType = pcl::PointXYZ;
@@ -52,6 +54,7 @@ void checkSubscriptionConnection(
 class GroundSegmentatioNode : public rclcpp::Node {
 public:
     GroundSegmentatioNode(rclcpp::NodeOptions options) : Node("ground_segmentation",options) {
+        pcl::console::setVerbosityLevel(pcl::console::L_ERROR); // hides WARN/DEBUG from PCL
         publisher_ground_points = this->create_publisher<sensor_msgs::msg::PointCloud2>("/ground_segmentation/ground_points", 10);
         publisher_obstacle_points = this->create_publisher<sensor_msgs::msg::PointCloud2>("/ground_segmentation/obstacle_points", 10);
         publisher_raw_points = this->create_publisher<sensor_msgs::msg::PointCloud2>("/ground_segmentation/raw_points", 10);

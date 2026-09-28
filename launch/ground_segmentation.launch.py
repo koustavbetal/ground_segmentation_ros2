@@ -46,7 +46,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             'pointcloud_topic',
-            default_value='/ground_segmentation/input_pointcloud',
+            default_value='/camera/depth/points',
             description='Topic name for the pointcloud',
         )
     )
